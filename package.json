@@ -1,0 +1,25 @@
+{
+  "name": "api-solid",
+  "version": "1.0.0",
+  "description": "Gypass style app.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "start": "node build/server.js",
+    "build": "tsup src --out-dir build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "20.10.0",
+    "tsup": "8.0.1",
+    "tsx": "4.5.0",
+    "typescript": "5.3.2"
+  },
+  "dependencies": {
+    "dotenv": "16.3.1",
+    "fastify": "4.24.3",
+    "zod": "3.22.4"
+  }
+}
