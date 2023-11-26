@@ -89,6 +89,7 @@
         "groups": [
           "/^./app/",
           "/^fastify/",
+          "/^@prisma/",
           "/^@/",
           [
             "module"
