@@ -16,9 +16,9 @@ describe('Register Use Case', () => {
 
   it('should hash user password upon registration', async () => {
     const usersRepository = new InMemoryUsersRepository();
-    const registerUseCase = new RegisterUseCase(usersRepository);
+    const sut = new RegisterUseCase(usersRepository);
 
-    const { user } = await registerUseCase.execute(userData);
+    const { user } = await sut.execute(userData);
 
     const isPasswordCorrectlyHashed = await compare(
       '123456',
@@ -30,19 +30,19 @@ describe('Register Use Case', () => {
 
   it('should not be able to register with same email twice', async () => {
     const usersRepository = new InMemoryUsersRepository();
-    const registerUseCase = new RegisterUseCase(usersRepository);
+    const sut = new RegisterUseCase(usersRepository);
 
-    await registerUseCase.execute(userData);
+    await sut.execute(userData);
 
-    await expect(() => registerUseCase.execute(userData))
+    await expect(() => sut.execute(userData))
       .rejects.toBeInstanceOf(UserAlreadyExistsError);
   });
 
   it('should be able to register', async () => {
     const usersRepository = new InMemoryUsersRepository();
-    const registerUseCase = new RegisterUseCase(usersRepository);
+    const sut = new RegisterUseCase(usersRepository);
 
-    const { user } = await registerUseCase.execute(userData);
+    const { user } = await sut.execute(userData);
 
     expect(user.id).toEqual('user-id');
   });
