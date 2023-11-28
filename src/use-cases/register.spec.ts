@@ -43,6 +43,6 @@ describe('Register Use Case', () => {
   it('should be able to register', async () => {
     const { user } = await sut.execute(userData);
 
-    expect(user.id).toEqual('user-id');
+    expect(user.id).toEqual(expect.any(String));
   });
 });
