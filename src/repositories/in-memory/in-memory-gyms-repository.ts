@@ -7,6 +7,13 @@ import { GymsRepository } from '../gyms-repository';
 export class InMemoryGymsRepository implements GymsRepository {
   public gyms: Gym[] = [];
 
+  async searchMany(query: string, page: number) {
+    const gyms = this.gyms.filter((gym) => gym.title.includes(query))
+      .slice((page - 1) * 20, page * 20);
+
+    return gyms;
+  }
+
   async findById(id: string) {
     const gym = this.gyms.find((gym) => gym.id === id);
     
