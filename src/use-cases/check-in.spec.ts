@@ -15,8 +15,8 @@ let sut: CheckInUseCase;
 const checkInData = {
   userId: 'user-id',
   gymId: 'gym-id',
-  userLatitude: 0,
-  userLongitude: 0,
+  userLatitude: -22.9345406,
+  userLongitude: -43.6279325,
 };
 
 const gymData = {
@@ -24,8 +24,8 @@ const gymData = {
   title: 'gym-title',
   description: 'gym-description',
   phone: 'gym-phone',
-  latitude: new Decimal(0),
-  longitude: new Decimal(0),
+  latitude: new Decimal(-22.9345406),
+  longitude: new Decimal(-43.6279325),
 };
 
 describe('Check In Use Case', () => {
@@ -68,5 +68,19 @@ describe('Check In Use Case', () => {
     const { checkIn }=await sut.execute(checkInData);
     
     expect(checkIn.id).toEqual(expect.any(String));
+  });
+
+  it('should not be able to check in on distant gym', async () => {
+    gymsRepository.gyms.push({
+      ...gymData,
+      id: 'another-gym-id',
+      latitude: new Decimal(-22.8912723),
+      longitude: new Decimal(-43.5439704),
+    });
+
+    await expect(() => sut.execute({
+      ...checkInData,
+      gymId: 'another-gym-id',
+    })).rejects.toBeInstanceOf(Error);
   });
 });
