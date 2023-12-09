@@ -1,7 +1,7 @@
 import request from 'supertest';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 
-import { app } from '../../app';
+import { app } from '../../../app';
 
 const user = {
   email: 'email@email.com',
