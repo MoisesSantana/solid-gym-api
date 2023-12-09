@@ -25,8 +25,8 @@ describe('Get User Metrics Use Case', () => {
       gym_id: 'gym-02',
     });
 
-    const { checkInsCout } = await sut.execute({ userId: 'user-id' });
+    const { checkInsCount } = await sut.execute({ userId: 'user-id' });
 
-    expect(checkInsCout).toBe(2);
+    expect(checkInsCount).toBe(2);
   });
 });
