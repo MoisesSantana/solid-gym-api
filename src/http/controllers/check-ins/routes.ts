@@ -2,6 +2,7 @@
 import { FastifyInstance } from 'fastify';
 
 import { verifyJWT } from '@/http/middlewares/verify-jwt';
+import { verifyUserRole } from '@/http/middlewares/verify-user-role';
 
 import { create } from './create.controller';
 import { histoy } from './history.controllet';
@@ -16,5 +17,5 @@ export async function checkInsRoute(app: FastifyInstance) {
 
   app.post('/gyms/:gymId/check-ins', create);
 
-  app.patch('/check-ins/:checkInId/validate', validate);
+  app.patch('/check-ins/:checkInId/validate', { onRequest: [verifyUserRole('ADMIN')] }, validate);
 }
